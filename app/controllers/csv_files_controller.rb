@@ -4,4 +4,8 @@ class CsvFilesController < ApplicationController
 
   def show
   end
+
+  def create
+  	puts params.inspect
+  end
 end

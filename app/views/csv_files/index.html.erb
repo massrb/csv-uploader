@@ -6,9 +6,6 @@
 	  </form>
 </nav>
 
-<h1>CsvFiles#index</h1>
-<p>Find me in app/views/csv_files/index.html.erb</p>
-
 
 <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -20,12 +17,38 @@
         </button>
       </div>
       <div class="modal-body">
-        Modal for upload
+        <form id="csv-form" class="csv-form" action="/csv_files/create" method="post">
+        	<div class="form-group">
+			    	<label for="formGroupIdentifier">Identifier</label>
+			    	<input type="text" class="form-control" id="formGroupIdentifier" placeholder="Identifier">
+				  </div>
+				  <div class="form-group">
+				    <label for="userEmail">Email address</label>
+				    <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" placeholder="Enter email">
+				    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+				  </div>
+				   	<div class="form-group">
+    					<label for="csvfile">CSV File</label>
+    					<input type="file" class="form-control-file" id="csvfile">
+  					</div>
+  				<input name="authenticity_token" type="hidden" 
+  				value="<%= form_authenticity_token %>">
+  				<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+	$( document ).ready(function() {
+		$("#csv-form").submit(function(event){ 
+			event.preventDefault();
+			alert('submit'); 
+		});
+	})
+</script>
+
