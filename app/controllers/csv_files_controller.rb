@@ -10,7 +10,13 @@ class CsvFilesController < ApplicationController
   	puts params.inspect
   	puts "FILE:"
 
-  	puts params[:csvfile].path
+  	rec = Csv.create
+  	fil = params[:csvfile]
+  	rec.csvfile.attach(io: File.open(fil.path), 
+  		filename: fil.original_filename, content_type: "text/csv")
+  	# rec.csvfile.attach(params[:csvfile])
+  	rec.name = params[:name]
+  	rec.save!
   	@data = 'mydata'
   end
 end
