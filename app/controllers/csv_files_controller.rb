@@ -8,6 +8,9 @@ class CsvFilesController < ApplicationController
 
   def create
   	puts params.inspect
+  	puts "FILE:"
+
+  	puts params[:csvfile].path
   	@data = 'mydata'
   end
 end

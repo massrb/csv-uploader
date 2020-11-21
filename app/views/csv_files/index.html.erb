@@ -17,7 +17,7 @@
         </button>
       </div>
       <div class="modal-body">
-      	<%= form_tag "/csv_files/create", :method => :post, :id => 'csv-form', :remote => true do %>
+      	<%= form_tag "/csv_files/create", :multipart => true, :method => :post, :id => 'csv-form', :remote => true do %>
         	<div class="form-group">
 			    	<label for="formGroupIdentifier">Identifier</label>
 			    	<input name="identifier" type="text" class="form-control" id="identifier" placeholder="Identifier">
