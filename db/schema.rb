@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_022239) do
+ActiveRecord::Schema.define(version: 2020_11_23_010746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,15 +36,16 @@ ActiveRecord::Schema.define(version: 2020_11_23_022239) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "csvs", force: :cascade do |t|
+  create_table "csv_uploads", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "status"
   end
 
   create_table "user_data", force: :cascade do |t|
+    t.bigint "csv_upload_id"
     t.string "first"
     t.string "last"
     t.string "email"
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_11_23_022239) do
     t.integer "row"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["csv_upload_id"], name: "index_user_data_on_csv_upload_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

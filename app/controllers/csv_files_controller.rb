@@ -12,13 +12,24 @@ class CsvFilesController < ApplicationController
   	puts params.inspect
   	puts "FILE:"
 
-  	rec = CsvUpload.create
+    rec = CsvUpload.find_by_name(params[:name])
+    if rec
+    else
+  	  rec = CsvUpload.create(upload_params)
+    end
   	fil = params[:csvfile]
   	rec.csvfile.attach(io: File.open(fil.path), 
   		filename: fil.original_filename, content_type: "text/csv")
   	# rec.csvfile.attach(params[:csvfile])
   	rec.name = params[:name]
   	rec.save!
+    UploadJob.perform_async({csv_id: rec.id})
   	@data = 'mydata'
+  end
+
+  private
+
+  def upload_params
+    params.require(:name, :email)
   end
 end
