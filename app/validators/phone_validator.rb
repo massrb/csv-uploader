@@ -13,7 +13,7 @@ class PhoneValidator < ActiveModel::Validator
       err = "#{emsg}, zero at index 0 or 3"
     end
     if err
-      record.errors.add(:base, err)
+      record.errors.add(:phone, err)
     end
   end
 

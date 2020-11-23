@@ -12,19 +12,17 @@ class CsvFilesController < ApplicationController
   	puts params.inspect
   	puts "FILE:"
 
-    rec = CsvUpload.find_by_name(params[:name])
+    rec = CsvUpload.find_by_name(params[:info][:name])
     if rec
+      puts 'GOT PREVIOUS REC !!!!!!!!!!!!!!'
     else
-      x = upload_params
-      puts 'X:'
-      puts x.inspect
   	  rec = CsvUpload.create(upload_params)
+      puts "REC:" + rec.inspect[0..200]
     end
   	fil = params[:csvfile]
   	rec.csvfile.attach(io: File.open(fil.path), 
   		filename: fil.original_filename, content_type: "text/csv")
   	# rec.csvfile.attach(params[:csvfile])
-  	rec.name = params[:name]
   	rec.save!
     UploadJob.perform_async({csv_id: rec.id})
   	@data = 'mydata'
@@ -33,6 +31,6 @@ class CsvFilesController < ApplicationController
   private
 
   def upload_params
-    params.permit(:info)
+    params.require(:info).permit(:name, :email)
   end
 end
