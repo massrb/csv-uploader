@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_21_203552) do
+ActiveRecord::Schema.define(version: 2020_11_23_022239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 2020_11_21_203552) do
   create_table "csvs", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "status"
+  end
+
+  create_table "user_data", force: :cascade do |t|
+    t.string "first"
+    t.string "last"
+    t.string "email"
+    t.string "phone"
+    t.integer "row"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,9 +1,11 @@
 class CsvFilesController < ApplicationController
 	# skip_before_action :verify_authenticity_token
   def index
+    puts "IDX !!!!!!!!!1"
   end
 
   def show
+    puts 'SHOW !!!!!!!!'
   end
 
   def create
