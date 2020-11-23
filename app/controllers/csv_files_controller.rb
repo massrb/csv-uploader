@@ -15,6 +15,9 @@ class CsvFilesController < ApplicationController
     rec = CsvUpload.find_by_name(params[:name])
     if rec
     else
+      x = upload_params
+      puts 'X:'
+      puts x.inspect
   	  rec = CsvUpload.create(upload_params)
     end
   	fil = params[:csvfile]
@@ -30,6 +33,6 @@ class CsvFilesController < ApplicationController
   private
 
   def upload_params
-    params.require(:name, :email)
+    params.permit(:info)
   end
 end

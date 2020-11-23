@@ -1,3 +1,6 @@
+
+require_relative '../validators/phone_validator'
+
 class UserDatum < ApplicationRecord
 	belongs_to :csv_upload
 	validates_with PhoneValidator
