@@ -12,7 +12,17 @@ class UploadJob
     rec.parse_csvfile
     puts 'done'
     rec.status = 'success'
-    rec.save!
+    rec.save! if rec.valid?
+    if !rec.valid?
+      puts 'NOT VALID !!!!!!!!'
+      puts rec.errors.inspect
+      rec.user_data.each do |r|
+        if !r.valid?
+          puts r.inspect
+          puts r.errors.inspect
+        end
+      end
+    end
     # block that will be retried in case of failure
   end
 end
