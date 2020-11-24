@@ -2,8 +2,9 @@
 
 console.log("recid", "<%= @recid.to_s %>");
 
+// spinner indicates backend is working
 let str = '<img src="' + "<%= image_path('loading.gif')%>" + '"' +
-  'width="55" height="55">'; 
+  'width="65" height="65">'; 
 $("#loading-container").html(str);
 
 (function poll() {
