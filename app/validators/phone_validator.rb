@@ -16,5 +16,4 @@ class PhoneValidator < ActiveModel::Validator
       record.errors.add(:phone, err)
     end
   end
-
 end

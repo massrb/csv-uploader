@@ -18,6 +18,8 @@ AllCops:
     - '**/node_modules/**/*'
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
+    - 'db/schema.rb'
+    - 'bin/yarn'
 
 Performance:
   Exclude:
@@ -38,6 +40,9 @@ Rails/IndexBy:
 
 Rails/IndexWith:
   Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Enabled: false  
 
 # Prefer &&/|| over and/or.
 Style/AndOr:
@@ -110,7 +115,7 @@ Layout/SpaceAfterColon:
   Enabled: true
 
 Layout/SpaceAfterComma:
-  Enabled: true
+  Enabled: false
 
 Layout/SpaceAfterSemicolon:
   Enabled: true
@@ -140,42 +145,29 @@ Style/DefWithParentheses:
 Style/MethodDefParentheses:
   Enabled: true
 
-Style/FrozenStringLiteralComment:
-  Enabled: true
-  EnforcedStyle: always
-  Exclude:
-    - 'actionview/test/**/*.builder'
-    - 'actionview/test/**/*.ruby'
-    - 'actionpack/test/**/*.builder'
-    - 'actionpack/test/**/*.ruby'
-    - 'activestorage/db/migrate/**/*.rb'
-    - 'activestorage/db/update_migrate/**/*.rb'
-    - 'actionmailbox/db/migrate/**/*.rb'
-    - 'actiontext/db/migrate/**/*.rb'
-
 Style/RedundantFreeze:
   Enabled: true
 
 # Use `foo {}` not `foo{}`.
 Layout/SpaceBeforeBlockBraces:
-  Enabled: true
+  Enabled: false
 
 # Use `foo { bar }` not `foo {bar}`.
 Layout/SpaceInsideBlockBraces:
-  Enabled: true
-  EnforcedStyleForEmptyBraces: space
+  Enabled: false
+  # EnforcedStyleForEmptyBraces: space
 
 # Use `{ a: 1 }` not `{a:1}`.
 Layout/SpaceInsideHashLiteralBraces:
-  Enabled: true
+  Enabled: false
 
 Layout/SpaceInsideParens:
   Enabled: true
 
 # Check quotes usage according to lint rule below.
 Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
+  Enabled: false
+  # EnforcedStyle: double_quotes
 
 # Detect hard tabs, no hard tabs.
 Layout/IndentationStyle:
@@ -183,7 +175,7 @@ Layout/IndentationStyle:
 
 # Empty lines should not have any spaces.
 Layout/TrailingEmptyLines:
-  Enabled: true
+  Enabled: false
 
 # No trailing whitespace.
 Layout/TrailingWhitespace:
@@ -261,7 +253,7 @@ Performance/EndWith:
   Enabled: true
 
 Performance/RegexpMatch:
-  Enabled: true
+  Enabled: false
 
 Performance/ReverseEach:
   Enabled: true

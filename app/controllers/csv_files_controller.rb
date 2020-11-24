@@ -1,11 +1,10 @@
 class CsvFilesController < ApplicationController
-	# skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
   def index
     @csv_uploads = CsvUpload.all
   end
 
   def show
-    puts params.inspect
     @csv_upload = CsvUpload.find_by_id(params[:id])
   end
 
@@ -14,15 +13,15 @@ class CsvFilesController < ApplicationController
     if rec
       puts 'GOT PREVIOUS REC !!!!!!!!!!!!!!'
     else
-  	  rec = CsvUpload.create(upload_params)
+      rec = CsvUpload.create(upload_params)
       puts "REC:" + rec.inspect[0..200]
     end
-  	fil = params[:csvfile]
-  	rec.csvfile.attach(io: File.open(fil.path), 
-  		filename: fil.original_filename, content_type: "text/csv")
-  	rec.save!
+    fil = params[:csvfile]
+    rec.csvfile.attach(io: File.open(fil.path), 
+      filename: fil.original_filename, content_type: "text/csv")
+    rec.save!
     UploadJob.perform_async({csv_id: rec.id})
-  	@recid = rec.id
+    @recid = rec.id
   end
 
   def check
@@ -31,7 +30,6 @@ class CsvFilesController < ApplicationController
   end
 
   private
-
   def upload_params
     params.require(:info).permit(:name, :email)
   end
