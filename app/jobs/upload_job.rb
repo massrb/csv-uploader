@@ -2,17 +2,17 @@ class UploadJob
   include Sidekiq::Worker
 
   def perform(args)
-    puts args
-    sleep 10
+    # simulate busy asynch
+    sleep 5
     rec = CsvUpload.find_by_id(args['csv_id'])
-    puts rec.inspect
+    rec.user_data.destroy_all
+    rec.error_rows.destroy_all
     rec.status = 'processing'
     rec.save!
-    puts '====== JOB ========'
     rec.parse_csvfile
-    puts 'done'
     rec.status = 'success'
     rec.save! if rec.valid?
+=begin    
     if !rec.valid?
       puts 'NOT VALID !!!!!!!!'
       puts rec.errors.inspect
@@ -23,6 +23,6 @@ class UploadJob
         end
       end
     end
-    # block that will be retried in case of failure
+=end    
   end
 end

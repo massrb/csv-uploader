@@ -11,10 +11,10 @@ class CsvFilesController < ApplicationController
   def create
     rec = CsvUpload.find_by_name(params[:info][:name])
     if rec
-      puts 'GOT PREVIOUS REC !!!!!!!!!!!!!!'
+      rec.email = params[:info][:email]
+      rec.csvfile.purge
     else
       rec = CsvUpload.create(upload_params)
-      puts "REC:" + rec.inspect[0..200]
     end
     fil = params[:csvfile]
     rec.csvfile.attach(io: File.open(fil.path), 
@@ -26,6 +26,9 @@ class CsvFilesController < ApplicationController
 
   def check
     rec = CsvUpload.find_by_id(params[:id])
+    # make sure db/cache settles down before client renders new data
+    # not sure why this is needed but fails without it
+    sleep 3 if rec.status == 'success'
     render json:({status: rec.status}.to_json)
   end
 

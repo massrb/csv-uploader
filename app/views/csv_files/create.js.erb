@@ -2,6 +2,10 @@
 
 console.log("recid", "<%= @recid.to_s %>");
 
+let str = '<img src="' + "<%= image_path('loading.gif')%>" + '"' +
+  'width="55" height="55">'; 
+$("#loading-container").html(str);
+
 (function poll() {
     setTimeout(function() {
         $.ajax({
@@ -15,7 +19,7 @@ console.log("recid", "<%= @recid.to_s %>");
             },
             dataType: "json",
             complete: poll,
-            timeout: 2000
+            timeout: 10000
         })
     }, 5000);
 })();
