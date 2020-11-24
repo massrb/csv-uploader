@@ -1,8 +1,9 @@
 
-<br>
-<h3>CSV Upload <%= @csv_upload.name %>: <%= @csv_upload.email%></h3>
-<br>
-<table class="table">
+<div class="container">
+
+<h3>CSV Upload: <%= @csv_upload.name %> (<%= @csv_upload.email%>)</h3>
+
+<table class="table main-table">
   <thead>
     <tr>
       <th scope="col">Row</th>
@@ -25,10 +26,8 @@
   </tbody>  
 </table>
 
-<br><br>
-
 <% if @csv_upload.error_rows.count > 0 %>
-  <table class="table error-table">
+  <table class="table error-table main-table">
     <thead>
       <tr>
         <th scope="col">Row</th>
@@ -44,3 +43,4 @@
       <% end %>
     </tbody>  
 <% end %>  
+</div>

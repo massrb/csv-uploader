@@ -53,10 +53,35 @@ RSpec.describe UserDatum, :type => :model do
   	expect(user2).to_not be_valid
   end
 
-
   it "is invalid with consecutive control chars" do
   	user2.phone = '123--4567890'
   	expect(user2).to_not be_valid
+  end
+
+  it "is invalid with too short of a name" do
+    user2.first = "a"
+    expect(user2).to_not be_valid
+  end
+
+  it "is invalid with a non alpha name" do
+    user2.first = "a1"
+    expect(user2).to_not be_valid
+  end
+
+  it "is valid with a alpha name" do
+    user2.first = "aa"
+    expect(user2).to be_valid
+  end
+
+  it "is invalid with only a last name" do
+    user2.last = "aa"
+    expect(user2).to_not be_valid
+  end
+
+  it "is valid with a first and last name" do
+    user2.last = "aa"
+    user2.first = 'bb'
+    expect(user2).to be_valid
   end
 
 
