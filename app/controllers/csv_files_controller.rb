@@ -14,7 +14,7 @@ class CsvFilesController < ApplicationController
       rec.email = params[:info][:email]
       rec.csvfile.purge
     else
-      rec = CsvUpload.create(upload_params)
+      rec = CsvUpload.create(upload_params) unless CsvUpload.count > 300
     end
     fil = params[:csvfile]
     rec.csvfile.attach(io: File.open(fil.path), 
