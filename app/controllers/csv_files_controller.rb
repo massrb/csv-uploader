@@ -17,6 +17,8 @@ class CsvFilesController < ApplicationController
       rec = CsvUpload.create(upload_params) unless CsvUpload.count > 300
     end
     fil = params[:csvfile]
+
+    logger.info("CSV FILE: #{fil.path}")
     rec.csvfile.attach(io: File.open(fil.path), 
       filename: fil.original_filename, content_type: "text/csv")
     rec.save!
