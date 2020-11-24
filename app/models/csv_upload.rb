@@ -4,7 +4,7 @@ class CsvUpload < ApplicationRecord
   has_many :error_rows, dependent: :destroy
 
   def parse_csvfile
-    csvfile.blob.open(tmpdir: Rails.root.join("tmp") do |file|
+    csvfile.blob.open(tmpdir: Rails.root.join("tmp")) do |file|
       CsvParser.parse(file.path, self)
     end
   end
