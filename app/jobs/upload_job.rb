@@ -3,7 +3,7 @@ class UploadJob
 
   def perform(args)
     puts args
-    sleep 3
+    sleep 10
     rec = CsvUpload.find_by_id(args['csv_id'])
     puts rec.inspect
     rec.status = 'processing'

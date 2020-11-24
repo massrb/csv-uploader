@@ -1,4 +1,22 @@
 
 
-console.log("data", "<%= @data %>")
+console.log("recid", "<%= @recid.to_s %>");
+
+(function poll() {
+    setTimeout(function() {
+        $.ajax({
+            url: "/csv_files/<%= @recid.to_s %>/check/",
+            type: "GET",
+            success: function(data) {
+                console.log("polling", data);
+                if (data.status == 'success') {
+                  window.location.assign("/csv_files/<%= @recid.to_s %>");
+                }
+            },
+            dataType: "json",
+            complete: poll,
+            timeout: 2000
+        })
+    }, 5000);
+})();
 

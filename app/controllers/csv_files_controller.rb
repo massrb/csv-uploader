@@ -1,17 +1,15 @@
 class CsvFilesController < ApplicationController
 	# skip_before_action :verify_authenticity_token
   def index
-    puts "IDX !!!!!!!!!1"
+    @csv_uploads = CsvUpload.all
   end
 
   def show
-    puts 'SHOW !!!!!!!!'
+    puts params.inspect
+    @csv_upload = CsvUpload.find_by_id(params[:id])
   end
 
   def create
-  	puts params.inspect
-  	puts "FILE:"
-
     rec = CsvUpload.find_by_name(params[:info][:name])
     if rec
       puts 'GOT PREVIOUS REC !!!!!!!!!!!!!!'
@@ -22,10 +20,14 @@ class CsvFilesController < ApplicationController
   	fil = params[:csvfile]
   	rec.csvfile.attach(io: File.open(fil.path), 
   		filename: fil.original_filename, content_type: "text/csv")
-  	# rec.csvfile.attach(params[:csvfile])
   	rec.save!
     UploadJob.perform_async({csv_id: rec.id})
-  	@data = 'mydata'
+  	@recid = rec.id
+  end
+
+  def check
+    rec = CsvUpload.find_by_id(params[:id])
+    render json:({status: rec.status}.to_json)
   end
 
   private
