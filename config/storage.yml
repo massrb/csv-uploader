@@ -8,11 +8,11 @@ local:
 
 amazon_dev:
   service: S3
-  access_key_id: <%= Rails.application.credentials.aws[:access_key_id] %>
+  access_key_id: <%= Rails.application.credentials.aws[:access_key_id] rescue nil %>
   secret_access_key:
-    <%= Rails.application.credentials.aws[:secret_access_key] %>
-  region: <%= Rails.application.credentials.aws[:region] %>
-  bucket: <%= Rails.application.credentials.aws[:dev][:bucket] %>
+    <%= Rails.application.credentials.aws[:secret_access_key] rescue nil %>
+  region: <%= Rails.application.credentials.aws[:region] rescue nil %>
+  bucket: <%= Rails.application.credentials.aws[:dev][:bucket] rescue nil %>
 
 amazon:
   service: S3
