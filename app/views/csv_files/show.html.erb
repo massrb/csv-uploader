@@ -1,46 +1,46 @@
 
 <div class="container">
 
-<h3>CSV Upload: <%= @csv_upload.name %> (<%= @csv_upload.email%>)</h3>
+  <h3>CSV Upload: <%= @csv_upload.name %> (<%= @csv_upload.email%>)</h3>
 
-<table class="table main-table">
-  <thead>
-    <tr>
-      <th scope="col">Row</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @csv_upload.user_data.each do |row| %>
-    <tr>
-      <th scope="row"><%= row.row %></th>
-      <td><%= row.first %></td>
-      <td><%= row.last %></td>
-      <td><%= row.email %></td>
-      <td><%= row.phone %></td>
-    </tr>
-    <% end %>
-  </tbody>  
-</table>
-
-<% if @csv_upload.error_rows.count > 0 %>
-  <table class="table error-table main-table">
+  <table class="table main-table">
     <thead>
       <tr>
         <th scope="col">Row</th>
-        <td> Error </td>
-      </tr>    
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+      </tr>
     </thead>
     <tbody>
-      <% @csv_upload.error_rows.each do |erow| %>
-        <tr>
-        <th scope="col"><%= erow.row %></th>
-        <td class='error-message'><%= erow.error_msg %>
-      </tr>    
+      <% @csv_upload.user_data.each do |row| %>
+      <tr>
+        <th scope="row"><%= row.row %></th>
+        <td><%= row.first %></td>
+        <td><%= row.last %></td>
+        <td><%= row.email %></td>
+        <td><%= row.phone %></td>
+      </tr>
       <% end %>
     </tbody>  
-<% end %>  
+  </table>
+
+  <% if @csv_upload.error_rows.count > 0 %>
+    <table class="table error-table main-table">
+      <thead>
+        <tr>
+          <th scope="col">Row</th>
+          <td> Error </td>
+        </tr>    
+      </thead>
+      <tbody>
+        <% @csv_upload.error_rows.each do |erow| %>
+          <tr>
+          <th scope="col"><%= erow.row %></th>
+          <td class='error-message'><%= erow.error_msg %>
+        </tr>    
+        <% end %>
+      </tbody>  
+  <% end %>  
 </div>

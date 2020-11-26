@@ -1,23 +1,20 @@
 
 <div class="container">
-
-<h3> CSV Uploads </h3>
-
-<table class="table csv-upload-table">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @csv_uploads.each do |rec| %>
-    <tr>
-      <td><%= link_to rec.name, csv_file_path(rec) %></td>
-      <td><%= rec.email %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>  
-
+  <h3> CSV Uploads </h3>
+  <table class="table csv-upload-table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @csv_uploads.each do |rec| %>
+      <tr>
+        <td><%= link_to rec.name, csv_file_path(rec) %></td>
+        <td><%= rec.email %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>  
 </div>
