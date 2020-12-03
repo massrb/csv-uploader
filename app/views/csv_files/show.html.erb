@@ -26,7 +26,7 @@
     </tbody>  
   </table>
 
-  <% if @csv_upload.error_rows.count > 0 %>
+  <% unless @csv_upload.error_rows.empty? %>
     <table class="table error-table main-table">
       <thead>
         <tr>
